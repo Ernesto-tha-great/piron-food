@@ -2,7 +2,7 @@ import React from "react";
 import { View, Text, Image, TouchableOpacity } from "react-native";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 
-const localRestaurants = [
+export const localRestaurants = [
   {
   name: "Beachside Bar",
   image_url:
@@ -32,11 +32,11 @@ const localRestaurants = [
 },
 ]
 
-const RestaurantImage = () => (
+const RestaurantImage = (props) => (
   <>
     <Image
       source={{
-        uri: "https://media.istockphoto.com/photos/cozy-restaurant-for-gathering-with-friends-picture-id1159992039?b=1&k=20&m=1159992039&s=170667a&w=0&h=prGK7E_h62IuZFQNtnCDPhqmG6y1-MV-l_NiJhuAl7Q=",
+        uri: props.image,
       }}
       style={{ width: "100%", height: 180 }}
     />
@@ -46,7 +46,7 @@ const RestaurantImage = () => (
   </>
 );
 
-const RestaurantInfo = () => (
+const RestaurantInfo = (props) => (
   <View
     style={{
       flexDirection: "row",
@@ -57,7 +57,7 @@ const RestaurantInfo = () => (
   >
     <View>
       <Text style={{ fontSize: 15, fontWeight: "bold" }}>
-        Farmhouse kitchen Thai Cuisine
+        {props.name}
       </Text>
       <Text style={{ fontSize: 13, color: "gray" }}>30-45 . min </Text>
     </View>
@@ -70,22 +70,36 @@ const RestaurantInfo = () => (
         borderRadius: 15,
       }}
     >
-      <Text>4.5</Text>
+      <Text>{props.rating}</Text>
     </View>
   </View>
 );
-const RestaurantItem = () => {
+
+
+
+
+
+const RestaurantItems = ({navigation, ...props}) => {
   return (
-    <TouchableOpacity activeOpacity={0.8} style={{ marginBottom: 30 }}>
-      {localRestaurants.map((restaurant, index) => (
-           <View key={index} style={{ marginTop: 10, padding: 15, backgroundColor: "white" }}>
-           <RestaurantImage />
-           <RestaurantInfo />
+    <>
+      {props.restaurantData.map((restaurant, index) => (
+        <TouchableOpacity  activeOpacity={0.8} key={index} style={{ marginBottom: 30 }} onPress={() => navigation.navigate("RestaurantDetail", {
+          name:restaurant.name, 
+          image:restaurant.image_url, 
+          price: restaurant.price, 
+          reviews:restaurant.review_count, 
+          rating: restaurant.rating, 
+          categories: restaurant.categories
+        })}>
+           <View  style={{ marginTop: 10, padding: 15, backgroundColor: "white" }}>
+           <RestaurantImage image={restaurant.image_url} />
+           <RestaurantInfo name={restaurant.name} rating={restaurant.rating} />
          </View>
+         </TouchableOpacity>
       ))}
-     
-    </TouchableOpacity>
+     </>
+   
   );
 };
 
-export default RestaurantItem;
+export default RestaurantItems;

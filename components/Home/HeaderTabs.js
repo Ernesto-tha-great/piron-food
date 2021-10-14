@@ -29,23 +29,23 @@ const HeaderButton = ({
   </TouchableOpacity>
 );
 
-const HeaderTabs = () => {
-  const [activeTab, setActiveTab] = useState("Delivery");
+const HeaderTabs = (props) => {
+  
   return (
     <View style={{ flexDirection: "row", alignSelf: "center" }}>
       <HeaderButton
         text="Delivery"
         btncolor="black"
         textColor="white"
-        activeTab={activeTab}
-        setActiveTab={setActiveTab}
+        activeTab={props.activeTab}
+        setActiveTab={props.setActiveTab}
       />
       <HeaderButton
         text="Pickup"
         btncolor="white"
         textColor="black"
-        activeTab={activeTab}
-        setActiveTab={setActiveTab}
+        activeTab={props.activeTab}
+        setActiveTab={props.setActiveTab}
       />
     </View>
   );
