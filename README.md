@@ -39,6 +39,6 @@ This project can be run from a web browser or the Expo client app. You may find 
 
 ## 📝 Notes
 
-- Learn more about [Universal React](https://docs.expo.dev/).
+- Learn more about [Expo](https://docs.expo.dev/).
 - See what API and components are [available in the React runtimes](https://docs.expo.dev/versions/latest/).
 - Find out more about developing apps and websites: [Guides](https://docs.expo.dev/guides/).
